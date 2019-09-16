@@ -16,6 +16,29 @@ REST is server efficient while GraphQL is client friendly.
 
 ### Core Concepts
 
+```
+Schema
+Type
+Field
+
+Root field (of the query)
+Payload (of the query)
+
+Mutations: create, update, delete
+
+Subscription
+```
+
+#### Schema Definition Language (SDL)
+```
+type Type-Name {
+  Field-Name1: Type-Name!
+  Field-Name2: [Type-Name]
+}
+
+# Note: "!" fields are non-null, [] is an array
+```
+
 Define a 1-N relationship:
 ```
 type Post {
@@ -27,7 +50,16 @@ type Person {
   age: Int!
   posts: [Post!]!
 }
-# Note: '!' fields are non-null, [] is an array
+```
+
+#### Query
+
+```
+{
+  Root-Field (_argument: _value) {
+    _payload
+  }
+}
 ```
 
 ```
@@ -42,6 +74,8 @@ type Person {
 }
 ```
 
+#### Mutations
+
 ```
 mutation {
   createPerson(name: "Bob", age: 36) {
@@ -51,6 +85,8 @@ mutation {
 }
 ```
 
+#### Subscription
+
 ```
 subscription {
   newPerson {
@@ -59,6 +95,8 @@ subscription {
   }
 }
 ```
+
+#### Schema
 
 ```
 type Query {
@@ -83,19 +121,45 @@ type Post {
   title: String!
   author: Person!
 }
+
+# Note: Query, Mutation, and Subscription types are the entry points
+# Note: allPersons, createPerson and newPerson are root field
 ```
 
 ### Big Picture (Architecture)
+
+GraphQL is a specification.  
 
 Use cases:  
 1) expose data in a database (AWS Aurora/MongoDB/...)
 2) integrates existing systems (legacy/microservice/third-party/...)
 3) mix of 1) and 2)
 
-Resolver function is responsible for fetching the data.  
+Resolver function is responsible for fetching the data for a field.  
 The server will package all the data and send it as a response.  
 
+```
+query {
+  User(id: _value) {
+    name
+    friends(first: 5) {
+      name
+      age
+    }
+  }
+}
+```
+
+```
+User(id: String!): User
+name(user: User!): String!
+age(user: User!): Int!
+friends(first: Int, user: User!): [User!]!
+```
+
 ### Clients
+
+Don't have to worry about over or under fetching data.
 
 ### Server
 
