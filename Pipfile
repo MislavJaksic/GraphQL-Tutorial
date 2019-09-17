@@ -13,6 +13,8 @@ pytest = "==5.1.2"
 mock = "==3.0.5"
 tox = "==3.14.0"
 graphene = "==2.1.8"
+flask = "==1.1.1"
+flask-graphql = "==2.0.0"
 
 [requires]
 python_version = "3.7"
