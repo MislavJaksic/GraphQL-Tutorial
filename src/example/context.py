@@ -1,7 +1,7 @@
 """
     Adds "src" to sys.path.
-    
-    Now you can do imports with "from big_package.Sub-Package ...".
+
+    Now you can do imports with "from example.Sub-Package ...".
 """
 import sys
 import os

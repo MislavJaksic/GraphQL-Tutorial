@@ -1,7 +1,7 @@
 import pytest
 
 from tests import context
-from big_package import server
+from example import server
 from graphene.test import Client
 
 
@@ -51,8 +51,27 @@ class TestMutations(object):
             }
         }
 
+    def test_create_person_no_age(self, person, client, teardown_database):
+        request = '''mutation {{
+                         createPerson(name:"{name}") {{
+                            name
+                            age
+                         }}
+                     }}'''.format(**person)
 
-class TestResolvers(object):
+        response = client.execute(request)
+
+        assert response == {
+            "data": {
+                "createPerson": {
+                    "name": person["name"],
+                    "age": -1
+                }
+            }
+        }
+
+
+class TestQueries(object):
     def test_simple(self, client):
         request = '''{
                          simple
@@ -90,7 +109,7 @@ class TestResolvers(object):
 
         server.faux_database = {}
 
-    def test_person(self, persons, client, setup_database):
+    def test_all_person(self, persons, client, setup_database):
         request = '''{
                          allPersons {
                              name
@@ -110,6 +129,27 @@ class TestResolvers(object):
                     {
                         "name": persons[1]["name"],
                         "age": persons[1]["age"]
+                    }
+                ]
+            }
+        }
+
+    def test_all_persons_argument(self, persons, client, setup_database):
+        request = '''{
+                         allPersons(name:"P") {
+                             name
+                             age
+                         }
+                     }'''
+
+        response = client.execute(request)
+
+        assert response == {
+            "data": {
+                "allPersons": [
+                    {
+                        "name": persons[0]["name"],
+                        "age": persons[0]["age"]
                     }
                 ]
             }

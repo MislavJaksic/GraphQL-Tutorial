@@ -9,7 +9,7 @@ with open('LICENSE') as f:
 setup(
     name="GraphQL-Tutorial",
     version="1.0.0",
-    description="GraphQL example.",
+    description="GraphQL server example.",
     long_description=readme,
     license=license,
 
@@ -20,5 +20,5 @@ setup(
 
     url="https://github.com/MislavJaksic/GraphQL-Tutorial",
 
-    entry_points={"console_scripts": ["Project-Name = src.big_package.runner:run"]}
+    entry_points={"console_scripts": ["graphql_server = src.example.runner:run"]}
 )

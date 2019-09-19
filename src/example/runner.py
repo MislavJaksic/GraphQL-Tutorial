@@ -1,8 +1,8 @@
 """
-    Project-Name.py
+    graphql_server
     ---------------
 
-    Runs the project.
+    An example of a GraphQL server.
 
     :copyrgiht: 2019 MislavJaksic
     :license: MIT License
@@ -12,19 +12,16 @@ from flask import Flask
 from flask_graphql import GraphQLView
 
 import context
-from big_package.server import schema
+from example.server import schema
 
 
 def main(args):
-    """main will be run if you run this script directly
+    """Visit "localhost:5000" to browse the server's API.
     """
 
     app = Flask(__name__)
-    app.add_url_rule(
-      '/',
-      view_func=GraphQLView.as_view('graphql', schema=schema, graphiql=True)
-    )
-    app.run()
+    app.add_url_rule("/", view_func=GraphQLView.as_view('graphql', schema=schema, graphiql=True))
+    app.run(debug=True)
 
 
 def run():

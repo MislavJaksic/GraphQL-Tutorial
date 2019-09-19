@@ -10,7 +10,7 @@ Each GraphQL server must be able to:
 
 #### Getting Started
 
-TODO? Simpler? Flask instead of Django?
+TODO? Simpler? Flask instead of Django? Yes, yes, yes!
 
 #### Queries
 
