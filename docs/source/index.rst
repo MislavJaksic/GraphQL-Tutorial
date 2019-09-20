@@ -3,28 +3,22 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Project-Name's documentation!
+Welcome to GraphQL Tutorial's documentation!
 ========================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-big_package runner
-------------------
+graphql runner
+--------------
 .. automodule:: runner
    :members:
 
-big_package package_one module_one
-----------------------------------
-.. automodule:: package_one.module_one
+graphql server
+--------------
+.. automodule:: server
    :members:
-
-big_package package_two module_two
-----------------------------------
-.. automodule:: package_two.module_two
-   :members:
-
 
 
 Indices and tables
@@ -33,4 +27,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
